@@ -1,8 +1,11 @@
-# Descripción 
-Que ha cambiado?
+# Descripción
+¿Que ha cambiado?
 
--[] Fronted
--[] Json
+- [ ] Frontend
+- [ ] Json
+- [ ] Otro
+
+Sí es otro comentelo.
 
 # ¿Cómo puedo probar los cambios?
 En que url (opcional) o forma puedo ver el update.
