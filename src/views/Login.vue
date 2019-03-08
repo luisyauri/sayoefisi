@@ -6,6 +6,9 @@
                     <v-card-title>
                         <v-layout row wrap text-xs-center>
                             <v-flex xs12>
+                                <v-img contain="true" src="http://www.urbanui.com/dataviz/template/images/logo.svg" aspect-ratio="5.0"></v-img>
+                            </v-flex>
+                            <v-flex xs12>
                                 <span class="title font-weight-light">INICIAR SESIÓN</span>
                             </v-flex>
                             <v-flex xs12>
@@ -15,7 +18,7 @@
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
-                        <v-form >
+                        <v-form @submit.prevent="iniciarSesion">
                             <v-text-field
                                     class="body-1 font-weight-light"
                                     prepend-icon="fa fa-user-circle"
@@ -38,6 +41,72 @@
                         </v-form>
                         <v-divider class="mt-3"></v-divider>
                     </v-card-text>
+                    <v-card-actions>
+                        <v-dialog v-model=dialog.registro persistent width="400">
+                            <v-btn slot="activator" flat class="font-weight-light">Registro</v-btn>
+                            <v-card>
+                                <v-card-title class="font-weight-light headline primary white--text">
+                                    REGISTRO
+                                </v-card-title>
+                                <v-card-text>
+                                    <p class="body-1 font-weight-light">Comuníquese con la Unayoe de la Facultad de Ingeniería de Sistemas e Informática de la Universidad Nacional Mayor de San Marcos.</p>
+                                    <v-divider></v-divider>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn class="font-weight-light" flat @click="dialog.registro = false">
+                                        Cerrar
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                        <v-spacer></v-spacer>
+                        <v-dialog v-model=dialog.olvideContraseña persistent width="400">
+                            <v-btn slot="activator" flat class="font-weight-light">Olvidé mi contraseña </v-btn>
+                            <v-card>
+                                <v-card-title class="font-weight-light headline primary white--text">
+                                    OLVIDÉ MI CONTRASEÑA
+                                </v-card-title>
+                                <v-card-text>
+                                    <v-container grid-list-md>
+                                        <v-layout wrap>
+                                            <v-flex xs12>
+                                                <p class="body-1 font-weight-light">Ingrese su <span class="font-weight-bold">Correo Institucional</span> y <span class="font-weight-bold">DNI</span> para enviarle una contraseña temporal.</p>
+                                            </v-flex>
+                                            <v-flex xs12>
+                                                <v-form>
+                                                    <v-text-field
+                                                            class="body-1 font-weight-light"
+                                                            prepend-icon="fa fa-user-circle"
+                                                            label="Ingrese su Correo Institucional"
+                                                            type="text"
+                                                            v-model="usuario.correo"
+                                                    ></v-text-field>
+                                                    <v-text-field
+                                                            class="body-1 font-weight-light"
+                                                            prepend-icon="fas fa-id-card"
+                                                            label="Ingrese su DNI"
+                                                            type="number"
+                                                            v-model="usuario.dni"
+                                                    ></v-text-field>
+                                                </v-form>
+                                            </v-flex>
+                                        </v-layout>
+                                    </v-container>
+                                    <v-divider></v-divider>
+                                </v-card-text>
+                                <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn class="font-weight-light" flat @click="dialog.olvideContraseña = false">
+                                        Cerrar
+                                    </v-btn>
+                                    <v-btn class="font-weight-light" color="success" flat @click="dialog.olvideContraseña = false">
+                                        Enviar
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-card-actions>
                 </v-card>
             </v-flex>
         </v-layout>
@@ -52,7 +121,23 @@
                 usuario:{
                     correo:'admin',
                     contraseña:'admin',
+                    dni:'74216514',
                 },
+                dialog:{
+                    registro:false,
+                    olvideContraseña:false,
+                },
+                valor: ''
+            }
+        },
+        methods:{
+            iniciarSesion(){
+
+                if(this.usuario.contraseña=='admin'){
+                    this.$router.push('unayoe');
+                }else{
+                    this.$router.push('estudiante');
+                }
             }
         }
     }
