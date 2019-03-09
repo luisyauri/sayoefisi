@@ -16,7 +16,7 @@ export default new Router({
       name:'login',
       component:Login,
       meta:{
-        requiresAuth: true,
+        // requiresAuth: true,
       }
     },
     {
@@ -24,14 +24,15 @@ export default new Router({
       name:'unayoe',
       component:Unayoe,
       meta:{
-        requiresUnayoe: true,
+        // requiresUnayoe: true,
       }
     },
     {
       path:'/estudiante',
       name:'estudiante',
+      component:Estudiante,
       meta:{
-        requiresEstudiante: true,
+        // requiresEstudiante: true,
       }
     },
     {

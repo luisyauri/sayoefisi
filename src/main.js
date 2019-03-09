@@ -7,27 +7,27 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!store.getters.loggedIn) {
-      next({
-        name: 'login',
-      })
-    } else {
-      next()
-    }
-  } else if (to.matched.some(record => record.meta.requiresUnayoe)) {
-    if (store.getters.loggedIn) {
-      next({
-        name: 'unayoe',
-      })
-    } else {
-      next()
-    }
-  } else {
-    next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(record => record.meta.requirsesAuth)) {
+//     if (!store.getters.loggedIn) {
+//       next({
+//         name: 'login',
+//       })
+//     } else {
+//       next()
+//     }
+//   } else if (to.matched.some(record => record.meta.requiresUnayoe)) {
+//     if (store.getters.loggedIn) {
+//       next({
+//         name: 'unayoe',
+//       })
+//     } else {
+//       next()
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 new Vue({
   router,

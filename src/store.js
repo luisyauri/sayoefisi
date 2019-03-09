@@ -11,7 +11,7 @@ export default new Vuex.Store({
   },
   getters:{
       loggedIn(state){
-          return state.token != null;
+          return state.token !== null;
       }
   },
   mutations: {
@@ -24,21 +24,22 @@ export default new Vuex.Store({
   },
   actions: {
     destroyToken(context){
-        axios.defaults.headers.cammon['Authorization'] = 'Bearer '+context.state.token;
+        //axios.defaults.headers.cammon['Authorization'] = 'Bearer '+context.state.token;
 
         if(context.getters.loggedIn){
             return new Promise((resolve,reject)=>{
                 axios.post('/logout')
-                    .then(function (response) {
+                    .then(response => {
                         localStorage.removeItem('access_token');
                         context.commit('destroyToken');
                         resolve(response);
                         // console.log(response);
                     })
-                    .catch(function (error) {
+                    .catch(error => {
                         localStorage.removeItem('access_token');
                         context.commit('destroyToken');
                         reject(error);
+                        // eslint-disable-next-line
                         console.log(error);
                     });
             })
