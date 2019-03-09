@@ -17,9 +17,33 @@ export default new Vuex.Store({
   mutations: {
       retrieveToken(state,token){
           state.token=token;
+      },
+      destroyToken(state){
+          state.token=null;
       }
   },
   actions: {
+    destroyToken(context){
+        axios.defaults.headers.cammon['Authorization'] = 'Bearer '+context.state.token;
+
+        if(context.getters.loggedIn){
+            return new Promise((resolve,reject)=>{
+                axios.post('/logout')
+                    .then(function (response) {
+                        localStorage.removeItem('access_token');
+                        context.commit('destroyToken');
+                        resolve(response);
+                        // console.log(response);
+                    })
+                    .catch(function (error) {
+                        localStorage.removeItem('access_token');
+                        context.commit('destroyToken');
+                        reject(error);
+                        console.log(error);
+                    });
+            })
+        }
+    },
     retrieveToken(context, credentials){
         return new Promise((resolve,reject)=>{
             axios.post('/auth/login', {

@@ -132,11 +132,6 @@
         },
         methods:{
             iniciarSesion(){
-                // if(this.usuario.contraseña=='admin'){
-                //     this.$router.push('unayoe');
-                // }else{
-                //     this.$router.push('estudiante');
-                // }
                 this.$store.dispatch('retrieveToken',{
                     correo: this.usuario.correo,
                     contrasenha: this.usuario.contrasenha,
@@ -144,7 +139,7 @@
                 // eslint-disable-next-line
                     .then(response =>{
                         this.$router.push({name:'unayoe'});
-                    })
+                    });
             }
         }
     }

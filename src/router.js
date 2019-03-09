@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Login from "./views/Login";
 import Unayoe from "./views/unayoe/Unayoe";
 import Estudiante from "./views/estudiante/Estudiante";
+import Logout from "./views/Logout";
 
 Vue.use(Router)
 
@@ -13,17 +14,30 @@ export default new Router({
     {
       path:'/',
       name:'login',
-      component:Login
+      component:Login,
+      meta:{
+        requiresAuth: true,
+      }
     },
     {
       path:'/unayoe',
       name:'unayoe',
-      component:Unayoe
+      component:Unayoe,
+      meta:{
+        requiresUnayoe: true,
+      }
     },
     {
       path:'/estudiante',
       name:'estudiante',
-      component:Estudiante
-    }
-  ]
+      meta:{
+        requiresEstudiante: true,
+      }
+    },
+    {
+      path:'/logout',
+      name:'logout',
+      component:Logout
+    },
+  ],
 })
