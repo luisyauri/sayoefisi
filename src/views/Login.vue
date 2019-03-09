@@ -3,19 +3,19 @@
         <v-layout row wrap align-center justify-center>
             <v-flex xs12 sm7 md5 lg4>
                 <v-card flat>
-                    <!--<v-card-title>-->
-                        <!--<v-layout row wrap text-xs-center>-->
-                            <!--<v-flex xs12>-->
-                                <!--<v-img contain="true" src="http://www.urbanui.com/dataviz/template/images/logo.svg" aspect-ratio="5.0"></v-img>-->
-                            <!--</v-flex>-->
-                            <!--<v-flex xs12>-->
-                                <!--<span class="title font-weight-light">INICIAR SESIÓN</span>-->
-                            <!--</v-flex>-->
-                            <!--<v-flex xs12>-->
-                                <!--<span class="subheading font-weight-light">¡Bienvenido! Por favor, ingrese a su cuenta.</span>-->
-                            <!--</v-flex>-->
-                        <!--</v-layout>-->
-                    <!--</v-card-title>-->
+                    <v-card-title>
+                        <v-layout row wrap text-xs-center>
+                            <v-flex xs12>
+                                <v-img src="http://www.urbanui.com/dataviz/template/images/logo.svg" contain aspect-ratio="5"></v-img>
+                            </v-flex>
+                            <v-flex xs12>
+                                <span class="title font-weight-light">INICIAR SESIÓN</span>
+                            </v-flex>
+                             <v-flex xs12>
+                                <span class="subheading font-weight-light">¡Bienvenido! Por favor, ingrese a su cuenta.</span>
+                             </v-flex>
+                        </v-layout>
+                    </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
                     <v-form @submit.prevent="iniciarSesion">
@@ -114,6 +114,7 @@
 </template>
 
 <script>
+    import jwt_decode from 'jwt-decode';
     export default {
         name: "Login",
         data(){
@@ -138,7 +139,17 @@
                 })
                 // eslint-disable-next-line
                     .then(response =>{
-                        this.$router.push({name:'unayoe'});
+                        const data = jwt_decode(response.data.token);
+                        let rol = data.rol.id;
+                        if(rol===1){
+                            this.$router.push({name:'unayoe'});
+                        }else if (rol===2) {
+                            this.$router.push({name:'estudiante'});
+                        }
+                        else{
+                            this.$router.push({name:'login'});
+                        }
+                        // window.localStorage.user = window.atob(response.token.split('.')[1])
                     });
             }
         }

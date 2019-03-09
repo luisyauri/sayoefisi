@@ -1,6 +1,5 @@
 <template>
     <div>
-
     </div>
 </template>
 
@@ -8,11 +7,14 @@
     export default {
         name: "Logout",
         created() {
-            this.$store.dispatch('destroyToken')
+            this.$store.dispatch('destroyToken');
+            // console.log(this.$store.dispatch('destroyUser'))
+            this.$router.push({name: 'login'});
             // eslint-disable-next-line
-            .then(response => {
-                this.$router.push({name: 'login'});
-             });
+            // .then(response => {
+            //     console.log("Hola")
+            //     this.$router.push({name: 'login'});
+            //  });
         }
     }
 </script>

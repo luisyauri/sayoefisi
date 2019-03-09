@@ -1,15 +1,32 @@
 <template>
     <div class="estudiante">
+        <ul>
+            <li><router-link :to="{name:'logout'}">Salir</router-link></li>
+        </ul>
         <h1>ESTUDIANTE</h1>
-        <h4>User :</h4>
-        <h4>Correo :</h4>
-        <h4>Token :</h4>
+        <li v-for="(v, k) in user" :key="k">
+            <b class="key">{{ k }}</b>: <span>{{ v }}</span>
+        </li>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
+    import jwt_decode from 'jwt-decode';
     export default {
-        name: "Estudiante"
+        name: "Estudiante",
+        computed:{
+            loggedIn(){
+                return this.$store.getters.loggedIn;
+            }
+        },
+        data(){
+            return{
+                user: jwt_decode(window.localStorage.access_token),
+                // user: JSON.parse(window.localStorage.user),
+                // rol: this.user,
+            }
+        }
     }
 </script>
 
