@@ -6,41 +6,41 @@
                     <v-card-title>
                         <v-layout row wrap text-xs-center>
                             <v-flex xs12>
-                                <v-img contain="true" src="http://www.urbanui.com/dataviz/template/images/logo.svg" aspect-ratio="5.0"></v-img>
+                                <v-img src="http://www.urbanui.com/dataviz/template/images/logo.svg" contain aspect-ratio="5"></v-img>
                             </v-flex>
                             <v-flex xs12>
                                 <span class="title font-weight-light">INICIAR SESIÓN</span>
                             </v-flex>
-                            <v-flex xs12>
+                             <v-flex xs12>
                                 <span class="subheading font-weight-light">¡Bienvenido! Por favor, ingrese a su cuenta.</span>
-                            </v-flex>
+                             </v-flex>
                         </v-layout>
                     </v-card-title>
                     <v-divider></v-divider>
                     <v-card-text>
-                        <v-form @submit.prevent="iniciarSesion">
-                            <v-text-field
-                                    class="body-1 font-weight-light"
-                                    prepend-icon="fa fa-user-circle"
-                                    label="Ingrese su correo institucional"
-                                    type="text"
-                                    v-model="usuario.correo"
-                            ></v-text-field>
-                            <v-text-field
-                                    class="body-1 font-weight-light"
-                                    prepend-icon="fas fa-key"
-                                    label="Ingrese su contraseña"
-                                    type="password"
-                                    v-model="usuario.contraseña"
-                            ></v-text-field>
-                            <v-layout row wrap>
-                                <v-flex xs12>
-                                    <v-btn type="submit" class="font-weight-light" depressed block color="info">Ingresar</v-btn>
-                                </v-flex>
-                            </v-layout>
-                        </v-form>
-                        <v-divider class="mt-3"></v-divider>
-                    </v-card-text>
+                    <v-form @submit.prevent="iniciarSesion">
+                        <v-text-field
+                                class="body-1 font-weight-light"
+                                prepend-icon="fa fa-user-circle"
+                                label="Ingrese su correo institucional"
+                                type="text"
+                                v-model="usuario.correo"
+                        ></v-text-field>
+                        <v-text-field
+                                class="body-1 font-weight-light"
+                                prepend-icon="fas fa-key"
+                                label="Ingrese su contraseña"
+                                type="password"
+                                v-model="usuario.contrasenha"
+                        ></v-text-field>
+                        <v-layout row wrap>
+                            <v-flex xs12>
+                                <v-btn type="submit" class="font-weight-light" depressed block color="info">Ingresar</v-btn>
+                            </v-flex>
+                        </v-layout>
+                    </v-form>
+                    <v-divider class="mt-3"></v-divider>
+                </v-card-text>
                     <v-card-actions>
                         <v-dialog v-model=dialog.registro persistent width="400">
                             <v-btn slot="activator" flat class="font-weight-light">Registro</v-btn>
@@ -114,14 +114,15 @@
 </template>
 
 <script>
+    import jwt_decode from 'jwt-decode';
     export default {
         name: "Login",
         data(){
             return{
                 usuario:{
-                    correo:'admin',
-                    contraseña:'admin',
-                    dni:'74216514',
+                    correo:'sayoe@gmail.com',
+                    contrasenha:'12345',
+                    dni:'',
                 },
                 dialog:{
                     registro:false,
@@ -132,12 +133,24 @@
         },
         methods:{
             iniciarSesion(){
-
-                if(this.usuario.contraseña=='admin'){
-                    this.$router.push('unayoe');
-                }else{
-                    this.$router.push('estudiante');
-                }
+                this.$store.dispatch('retrieveToken',{
+                    correo: this.usuario.correo,
+                    contrasenha: this.usuario.contrasenha,
+                })
+                // eslint-disable-next-line
+                    .then(response =>{
+                        const data = jwt_decode(response.data.token);
+                        let rol = data.rol.id;
+                        if(rol===1){
+                            this.$router.push({name:'unayoe'});
+                        }else if (rol===2) {
+                            this.$router.push({name:'estudiante'});
+                        }
+                        else{
+                            this.$router.push({name:'login'});
+                        }
+                        // window.localStorage.user = window.atob(response.token.split('.')[1])
+                    });
             }
         }
     }
