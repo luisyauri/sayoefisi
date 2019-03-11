@@ -6,6 +6,10 @@ import Unayoe from "./views/unayoe/Unayoe";
 import Estudiante from "./views/estudiante/Estudiante";
 import Logout from "./views/Logout";
 import Test from "./views/Test";
+import DashboardUnayoe from "./components/unayoe/DashboardUnayoe";
+import MiPerfilUnayoe from "./components/unayoe/MiPerfilUnayoe";
+import EvaluacionesPsicologicasUnayoe from "./components/unayoe/EvaluacionesPsicologicasUnayoe";
+import EstudiantesUnayoe from "./components/unayoe/EstudiantesUnayoe";
 
 Vue.use(Router)
 
@@ -26,7 +30,29 @@ export default new Router({
       component:Unayoe,
       meta:{
         requiresUnayoe: true,
-      }
+      },
+      children:[
+        {
+          path:'/',
+          name:'dashboard-unayoe',
+          component: DashboardUnayoe
+        },
+        {
+          path:'mi-perfil',
+          name:'mi-perfil-unayoe',
+          component: MiPerfilUnayoe
+        },
+        {
+          path:'evaluaciones-psicologicas',
+          name:'evaluaciones-psicologicas-unayoe',
+          component: EvaluacionesPsicologicasUnayoe
+        },
+        {
+          path:'estudiantes',
+          name:'estudiantes-unayoe',
+          component: EstudiantesUnayoe
+        }
+      ]
     },
     {
       path:'/estudiante',

@@ -1,22 +1,21 @@
 <template>
     <div class="unayoe">
-        <ul>
-            <li><router-link :to="{name:'logout'}">Salir</router-link></li>
-        </ul>
-        <h1>UNAYOE</h1>
-        <li v-for="(v, k) in user" :key="k">
-            <b class="key">{{ k }}</b>: <span>{{ v }}</span>
-        </li>
-
-        <router-view></router-view>
+        <toolbar-unayoe></toolbar-unayoe>
+        <v-content>
+            <router-view></router-view>
+        </v-content>
     </div>
 </template>
 
 <script>
-    import jwt_decode from 'jwt-decode';
+    // import jwt_decode from 'jwt-decode';
+    import ToolbarUnayoe from '../../components/unayoe/ToolbarUnayoe'
 
     export default {
         name: "Unayoe",
+        components:{
+            ToolbarUnayoe
+        },
         computed:{
             loggedIn(){
                 return this.$store.getters.loggedIn;
@@ -24,7 +23,7 @@
         },
         data(){
             return{
-                user: jwt_decode(window.localStorage.access_token),
+                // user: jwt_decode(window.localStorage.access_token),
                 // user: JSON.parse(window.localStorage.user),
                 // rol: this.user,
             }
