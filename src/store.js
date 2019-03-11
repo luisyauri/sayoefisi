@@ -24,7 +24,7 @@ export default new Vuex.Store({
         },
         destroyToken(state) {
             state.token = null;
-        }
+        },
     },
     actions: {
         destroyToken(context) {
@@ -48,6 +48,25 @@ export default new Vuex.Store({
                         // const data = window.atob(response.data.token('.')[1]);
                         localStorage.setItem('access_token', token);
                         context.commit('retrieveToken',token);
+                        resolve(response);
+                        // eslint-disable-next-line
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        // eslint-disable-next-line
+                        console.log(error);
+                        reject(error);
+                    });
+            })
+        },
+        jsonPerfilUnayoe(context){
+            axios.defaults.headers.common['Authorization'] = 'Bearer '+context.state.token;
+            return new Promise((resolve, reject) => {
+                axios.get('unayoe-perfil/1')
+                    .then(function (response) {
+                        //console.log(data);
+                        // const data = window.atob(response.data.token('.')[1]);
+                        context.commit('jsonPerfilUnayoe');
                         resolve(response);
                         // eslint-disable-next-line
                         console.log(response);

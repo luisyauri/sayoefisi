@@ -3,6 +3,18 @@
         <toolbar-unayoe></toolbar-unayoe>
         <v-content>
             <router-view></router-view>
+            <v-container grid-list-md>
+                <v-layout row wrap>
+                    <v-flex>
+                        <v-card class="elevation-0 pa-3 mb-3">
+                            <div class="justify-end body-1 font-weight-light ">
+                                &copy;2018 — Team SAYOE
+                            </div>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+
         </v-content>
     </div>
 </template>

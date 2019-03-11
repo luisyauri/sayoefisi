@@ -10,7 +10,7 @@
             </v-btn>
             <v-btn icon >
                 <v-avatar size="32px">
-                    <img src="https://scontent.flim10-1.fna.fbcdn.net/v/t1.0-1/p160x160/27332182_1881661202164725_1651838000350423678_n.jpg?_nc_cat=107&_nc_eui2=AeGiAvIho3d2THLFeXdLo2jP2FMPZqqkxqizSfYmfYi8avcFSGamHK3btOZnTA4-YEtMztystrPcpdsZ83rjAtfVWO9CHk7zS-OK2PT7cHvjvA&_nc_ht=scontent.flim10-1.fna&oh=8dc1b23e049011f3b5698646f98b55f7&oe=5CDA9349" alt="">
+                    <img src="http://react-material.fusetheme.com/assets/images/avatars/Velazquez.jpg" alt="">
                 </v-avatar>
             </v-btn>
             <!--<v-menu offset-y>-->
