@@ -27,7 +27,7 @@ router.beforeEach((to, from, next) => {
       next({
         name:'login'
       })
-    }else if(store.getters.loggedIn && jwt_decode(store.state.token).rol.id===1){
+    }else if(store.getters.loggedIn && jwt_decode(store.state.token).rol.id===542687){
       next({
         name:'unayoe',
       })
@@ -35,7 +35,7 @@ router.beforeEach((to, from, next) => {
       next()
     }
   }else if(to.matched.some(record =>record.meta.requiresVisitante)){
-    if(store.getters.loggedIn && jwt_decode(store.state.token).rol.id===1){
+    if(store.getters.loggedIn && jwt_decode(store.state.token).rol.id===542687){
       next({
         name:'unayoe',
       })

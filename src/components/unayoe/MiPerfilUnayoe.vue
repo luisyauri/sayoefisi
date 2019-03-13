@@ -12,100 +12,54 @@
                 </v-flex>
             </v-layout>
             <v-layout row wrap>
-                <v-flex xs12 sm4>
+                <v-flex xs12 sm5>
                     <v-card flat >
                         <v-card-text class="text-xs-center">
-                            <v-alert class="mb-3" :value="true" type="success">
-                                {{mensajeMes}}
-                            </v-alert>
-                            <v-divider class="my-2" light></v-divider>
                             <v-avatar class="my-2" size="150px">
-                                <img src="http://react-material.fusetheme.com/assets/images/avatars/Velazquez.jpg" alt="">
+                                <img :src="unayoe.foto" alt="">
                             </v-avatar>
-                            <div class="subheading font-weight-regular my-2">{{unayoe.nombresApellidos}}</div>
-                            <div class="body-2 font-weight-light my-2">{{unayoe.estado}}</div>
-                            <div class="body-2 font-weight-light my-2"><span class="font-weight-regular">{{unayoe.ultimaSesión}}</span> Ultima Sesión</div>
+
+                            <div class="body-2 font-weight-light my-2">{{unayoe.autenticado}}</div>
+                            <div class="body-2 font-weight-light my-2">Ultima Sesión : <span class="font-weight-regular">{{unayoe.ultimaSesión}}</span></div>
                             <v-card-actions>
-                                <v-btn flat class="body-2" color="blue">Facebook</v-btn>
                                 <v-spacer></v-spacer>
-                                <v-btn flat class="body-2" color="red">Gmail</v-btn>
+                                <v-btn @click="abrirFacebook" outline small fab color="#339AF0">
+                                    <v-icon>fab fa-facebook-f</v-icon>
+                                </v-btn>
+                                <v-btn @click="abrirWhatsapp" outline small fab color="#12B886">
+                                    <v-icon>fab fa-whatsapp</v-icon>
+                                </v-btn>
+                                <v-spacer></v-spacer>
                             </v-card-actions>
                         </v-card-text>
                     </v-card>
                 </v-flex>
-                <v-flex xs12 sm8>
+                <v-flex xs12 sm7>
                     <v-card flat="">
                         <v-card-title>
                             <v-icon left>fas fa-vote-yea</v-icon>
-                            <span class="subheading font-weight-light">Datos Generales</span>
+                            <span class="subheading font-weight-regular">Datos Generales</span>
                         </v-card-title>
                         <v-divider light></v-divider>
                         <v-card-text class="my-2">
-                            <v-layout row wrap >
-                                <v-flex xs12 sm6>
-                                    <v-text-field
-                                            class="body-2 font-weight-light"
-                                            v-model="unayoe.nombresApellidos"
-                                            label="Nombres y Apellidos"
-                                            disabled
-                                    ></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 sm6>
-                                    <v-text-field
-                                            class="body-2 font-weight-light"
-                                            v-model="unayoe.profesion"
-                                            label="Profesión"
-                                            disabled
-                                    ></v-text-field>
-                                </v-flex>
-                            </v-layout>
                             <v-layout row wrap>
-                                <v-flex xs12 sm6>
-                                    <v-text-field
-                                            class="body-2 font-weight-light"
-                                            v-model="unayoe.facultad"
-                                            label="Facultad"
-                                            disabled
-                                    ></v-text-field>
+                                <v-flex xs12 class="font-weight-light">
+                                    <span class="font-weight-regular">Nombres y Apellidos : </span> <span>{{unayoe.nombresApellidos}}</span>
                                 </v-flex>
-                                <v-flex xs12 sm6>
-                                    <v-text-field
-                                            class="body-2 font-weight-light"
-                                            v-model="unayoe.cargo"
-                                            label="Cargo"
-                                            disabled
-                                    ></v-text-field>
+                                <v-flex xs12 class="font-weight-light">
+                                    <span class="font-weight-regular">Profesión : </span> <span>{{unayoe.profesion}}</span>
                                 </v-flex>
-                            </v-layout>
-                            <v-layout row wrap>
-                                <v-flex xs12 sm6>
-                                    <v-text-field
-                                            class="body-2 font-weight-light"
-                                            v-model="unayoe.correo"
-                                            label="Correo"
-                                            disabled
-                                    ></v-text-field>
+                                <v-flex xs12 class="font-weight-light">
+                                    <span class="font-weight-regular">Facultad : </span> <span>{{unayoe.facultad}}</span>
                                 </v-flex>
-                                <v-flex xs12 sm6>
-                                    <v-text-field
-                                            class="body-2 font-weight-light"
-                                            v-model="unayoe.celular"
-                                            label="Celular"
-                                            disabled
-                                    ></v-text-field>
+                                <v-flex xs12 class="font-weight-light">
+                                    <span class="font-weight-regular">Cargo : </span> <span>{{unayoe.cargo}}</span>
                                 </v-flex>
-                            </v-layout>
-                            <v-layout row wrap>
-                                <v-flex xs12 >
-                                    <v-textarea
-                                            auto-grow
-                                            class="body-2 font-weight-light"
-                                            label="Sobre mí"
-                                            v-model="unayoe.autodescripcion"
-                                            hint="Se recomienda no más de 200 caracteres."
-                                            disabled
-                                    >
-                                    </v-textarea>
+                                <v-flex xs12 class="font-weight-light">
+                                    <span class="font-weight-regular">Correo : </span> <span>{{unayoe.correo}}</span>
+                                </v-flex>
+                                <v-flex xs12 class="font-weight-light">
+                                    <span class="font-weight-regular">Celular : </span> <span>{{unayoe.celular}}</span>
                                 </v-flex>
                             </v-layout>
                             <v-divider light></v-divider>
@@ -118,7 +72,16 @@
                         </v-card-text>
                     </v-card>
                 </v-flex>
-
+                <v-flex xs12>
+                    <v-card flat>
+                        <v-card-text>
+                            <v-flex xs12 class="font-weight-light">
+                                <span class="font-weight-regular">Sobre mí : </span>
+                                <div>{{unayoe.autodescripcion}}</div>
+                            </v-flex>
+                        </v-card-text>
+                    </v-card>
+                </v-flex>
             </v-layout>
         </v-container>
     </div>
@@ -130,7 +93,19 @@
         created(){
           this.$store.dispatch('jsonPerfilUnayoe')
               .then(response =>{
-                  this.unayoe.profesion = response.data.profesion;
+                  var dataMiPerfil = response.data.data[0];
+                  this.unayoe.nombresApellidos = dataMiPerfil.nombre + dataMiPerfil.apellido_paterno + dataMiPerfil.apellido_materno;
+                  this.unayoe.profesion = dataMiPerfil.profesion;
+                  this.unayoe.facultad = dataMiPerfil.facultad;
+                  // this.unayoe.cargo = dataMiPerfil.cargo FALTA
+                  this.unayoe.correo = dataMiPerfil.usuario.correo;
+                  this.unayoe.celular = dataMiPerfil.celular;
+                  this.unayoe.autodescripcion = dataMiPerfil.auto_descripcion;
+                  this.unayoe.autenticado = dataMiPerfil.usuario.autenticado;
+                  this.unayoe.ultimaSesión = dataMiPerfil.usuario.ultima_sesion;
+                  this.unayoe.foto = dataMiPerfil.foto;
+                  this.unayoe.facebook = dataMiPerfil.facebook;
+                  this.unayoe.whatsapp = dataMiPerfil.facebook;
               })
         },
         data(){
@@ -139,22 +114,31 @@
                     titulo:'Mi Perfil',
                     icono:'fas fa-user-circle'
                 },
-                mensajeMes: 'Tu trabajo va a llenar gran parte de tu vida, la única manera de estar realmente satisfecho es hacer lo que creas es un gran trabajo y la única manera de hacerlo es amar lo que haces.',
                 unayoe:{
-                    nombresApellidos:'Luis David Yauri Martinez',
-                    profesion:"",
-                    facultad:"Ingeniería de Sistemas e Informática",
-                    cargo: "Jefe Unayoe",
-                    correo: "luis@gmail.com",
-                    celular: "(+51) 999-999-999",
-                    autodescripcion:'The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through.',
-                    estado:'• En Línea',
-                    ultimaSesión:'14:15:10',
-                    foto:''
+                    nombresApellidos:'',
+                    profesion:'',
+                    facultad:"",
+                    cargo: 'Jefa',
+                    correo: '',
+                    celular: '',
+                    autodescripcion:'',
+                    autenticado:'',
+                    ultimaSesión:'',
+                    foto:'',
+                    facebook:'',
+                    whatsapp:'',
                 },
 
 
 
+            }
+        },
+        methods:{
+            abrirFacebook(){
+                window.open(this.unayoe.facebook);
+            },
+            abrirWhatsapp(){
+                window.open(this.unayoe.facebook);
             }
         }
     }

@@ -141,7 +141,7 @@
                     .then(response =>{
                         const data = jwt_decode(response.data.token);
                         let rol = data.rol.id;
-                        if(rol===1){
+                        if(rol===542687){
                             this.$router.push({name:'unayoe'});
                         }else if (rol===2) {
                             this.$router.push({name:'estudiante'});
